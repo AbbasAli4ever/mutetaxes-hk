@@ -1,0 +1,1 @@
+export { SupportedPaymentMethodsSection } from "./SupportedPaymentMethodsSection";
