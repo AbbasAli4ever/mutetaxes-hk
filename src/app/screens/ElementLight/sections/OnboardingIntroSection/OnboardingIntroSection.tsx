@@ -1,220 +1,62 @@
-import * as React from "react";
+"use client";
+import React from "react";
 import { Badge } from "../../../../components/ui/badge";
-import { Button } from "../../../../components/ui/button";
-import { Card, CardContent } from "../../../../components/ui/card";
+import Image from "next/image";
+import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const plans = [
-  {
-    name: "Starter Shield",
-    description: "Perfect for testing new markets",
-    subtitle: "HK Company + Airwallex Only",
-    features: ["Full company registration", "Airwallex banking account"],
-    investment: {
-      ownName: "€1,800",
-      nominee: "€2,200",
-    },
-    cta: "Get Started in 7 Days",
-    highlighted: false,
-    featured: false,
-  },
-  {
-    name: "Fortress Package",
-    description: "Complete protection for serious sellers",
-    subtitle: "Everything You Need to Scale",
-    features: [
-      "HK Company Registration",
-      "PayPal with VIP Support\n(6% dispute tolerance)",
-      "Airwallex Account",
-      "Payoneer VIP Account and\n5+ more banks",
-      "Access to 9+ PayPal Reps",
-      "Unlimited PayPal Reactivations",
-    ],
-    investment: {
-      ownName: "€3,000",
-      nominee: "€3,500",
-    },
-    cta: "87% of Clients Choose This",
-    highlighted: true,
-    featured: true,
-  },
-  {
-    name: "Titanium Protection",
-    description: "Maximum security for high-volume sellers",
-    subtitle: "The Ultimate Safety Net",
-    features: [
-      "Everything in Fortress Package PLUS",
-      "OceanPayments Integration\n(2.5% dispute tolerance)",
-      "FREE Legal Letter for Money Holds",
-      "Priority Support Queue",
-      "Dedicated Account Manager",
-    ],
-    investment: {
-      ownName: "€4,000",
-      nominee: "€4,500",
-    },
-    cta: "For Sellers Doing €100K+/Month",
-    highlighted: false,
-    featured: false,
-  },
-] as const;
+const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
 
-export const OnboardingIntroSection = (): React.JSX.Element => {
+const features = [
+  { text: "Backed by insiders" },
+  { text: "Trusted by 7-figure businesses" },
+  { text: "100% Money-Back Guarantee" },
+];
+
+export const OnboardingIntroSection = () => {
   return (
-    <section className="relative w-full px-0 pt-3.5 pb-[70px]">
-      <div className="relative mx-auto flex w-full flex-col items-center gap-[63px] px-4 sm:px-6 lg:px-8">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-[120px] mx-auto hidden h-[455px] w-full max-w-[1372px] rounded-full bg-[#1544ea4c] blur-[59px] lg:block"
-        />
-        <header className="relative z-10 flex w-full flex-col items-center justify-center gap-[19.4px]">
-          <Badge className="rounded-[130px] bg-[linear-gradient(61deg,rgba(22,68,235,1)_0%,rgba(128,156,255,1)_80%)] px-4 py-1.5 text-base font-medium leading-[24.8px] text-white shadow-[0px_4px_24px_#00000040] hover:bg-[linear-gradient(61deg,rgba(22,68,235,1)_0%,rgba(128,156,255,1)_80%)]">
-            <span className="[font-family:'Inter',Helvetica]">
-              MOST POPULAR
-            </span>
-          </Badge>
-          <div className="flex flex-col items-center px-2">
-            <img
-              className="h-auto w-full max-w-[396px]"
-              alt="Choose your armor"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/choose-your-armor-level.svg"
-            />
-          </div>
-          <div className="max-w-[658px] px-[17.11px] text-center [font-family:'Inter',Helvetica] text-lg font-normal leading-7 tracking-[0] text-[#6f6f6f]">
-            Choose a plan that suits your needs and budget. Each plan is
-            designed to
-            <br />
-            offer maximum value and flexibility.
-          </div>
-          <div className="inline-flex items-center gap-2 rounded-[48px] border border-solid border-[#d03232] bg-[#d0323230] px-4 py-2">
-            <img
-              className="relative h-6 w-6"
-              alt="Frame"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/frame-17.svg"
-            />
-            <p className="[font-family:'Inter',Helvetica] text-center text-base font-normal leading-6 tracking-[0] text-[#d03232]">
-              Prices Increase December 1st • Lock in current pricing before
-              December 1st
-            </p>
-          </div>
-        </header>
-        <div className="relative z-10 grid w-full max-w-screen-xl grid-cols-1 justify-center gap-[38.8px] md:grid-cols-2 xl:grid-cols-3">
-          {plans.map((plan) => (
-            <article
-              key={plan.name}
-              className="flex h-full w-full items-stretch justify-center"
+    <section className="relative w-full max-w-[1238px] mx-auto bg-[#F4F4FE] rounded-2xl md:rounded-3xl overflow-hidden backdrop-blur-[58px] py-8 md:py-12 lg:py-[39px] px-4 md:px-6 lg:px-8">
+      <div className="text-center mb-[19px]">
+        <Badge className="px-3 py-2 bg-[#4ade801a] border-[#4ade80] inline-flex items-center gap-1.5 rounded-[48px] border border-solid">
+          <Image className="relative flex-[0_0_auto] w-4 h-4" alt="Frame" src="/green-tick.svg" width={16} height={16} />
+          <span className="[font-family:'Inter',Helvetica] font-semibold text-[#4ade80] text-sm md:text-base text-center tracking-[0] leading-[17.6px] whitespace-nowrap">
+            Smart Strategy
+          </span>
+        </Badge>
+      </div>
+      <div className="flex flex-col w-full max-w-[974px] mx-auto items-center gap-6 md:gap-8 lg:gap-10">
+        <h2 className="w-full max-w-[974px] [font-family:'Cambo',Helvetica] text-transparent font-normal text-[26px] sm:text-3xl md:text-[36px] lg:text-[40px] text-center tracking-[0] leading-[34px] md:leading-[47.6px] px-2">
+          <span className="bg-[linear-gradient(90deg,#4ADE80_0%,#1D1C20_100%)] bg-clip-text text-transparent">
+            Smart entrepreneurs don&apos;t play roulette with{" "}
+            <span className="hidden md:inline"><br /></span>
+            Stripe. They choose a Hong Kong PSP setup{" "}
+            <span className="hidden md:inline"><br /></span>
+            engineered by insiders for guaranteed <br />reliability.
+          </span>
+        </h2>
+        <div className="flex flex-col items-center w-full gap-4 md:gap-[24px]">
+          <div className="flex items-center justify-center w-full">
+            <a
+              onClick={() => openWhatsAppWithUtm(WA_NUMBERS, "mutetaxes-hk")}
+              className="h-9 px-[20px] py-2 cursor-pointer relative w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:py-6 rounded-xl bg-[#1544ea] text-white font-bold overflow-hidden transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(21,68,234,0.45)] hover:bg-gradient-to-r hover:from-[#1d54f5] hover:to-[#0e3bcf] active:scale-[0.98]"
             >
-              <Card
-                className={`relative flex w-full flex-col overflow-hidden rounded-[29.06px] border bg-[#f4f4fe] shadow-[0px_1px_2px_-1px_#0000001a,0px_1px_3px_#0000001a] ${
-                  plan.highlighted
-                    ? "min-h-[862px] border-[#6c04fd99]"
-                    : "min-h-[780px] border-transparent"
-                }`}
-              >
-                {plan.highlighted && (
-                  <img
-                    className="pointer-events-none absolute right-px top-px h-[730px] w-[380px] max-w-none"
-                    alt="Card gradient"
-                    src="https://c.animaapp.com/mpv8f0th9epBAX/img/card-gradient.svg"
-                  />
-                )}
-
-                <CardContent className="relative z-10 flex h-full flex-1 flex-col justify-between px-[23.25px] py-8">
-                  <div className="flex flex-1 flex-col">
-                    <div className="flex flex-col gap-[23px]">
-                      <div className="flex flex-col gap-3">
-                        <div className="flex flex-col gap-1">
-                          <h3 className="[font-family:'Cambo',Helvetica] text-[32.9px] font-normal leading-[39.5px] tracking-[0] text-[#1d1c20]">
-                            {plan.name}
-                          </h3>
-                          <p className="[font-family:'Inter',Helvetica] text-lg font-light leading-[27.9px] tracking-[-1.00px] text-[#2a2a3a]">
-                            {plan.description}
-                          </p>
-                        </div>
-                        <p className="[font-family:'Inter',Helvetica] text-[19.4px] font-normal leading-[30px] tracking-[0] text-[#1544ea]">
-                          {plan.subtitle}
-                        </p>
-                      </div>
-                      <div className="flex flex-col gap-[22.99px]">
-                        <div className="flex items-center gap-[10.25px]">
-                          <h4 className="[font-family:'Inter',Helvetica] text-[17.4px] font-normal leading-[24.4px] tracking-[0] text-[#2a2a3a]">
-                            What&#39;s Included
-                          </h4>
-                          <img
-                            className="h-px min-w-0 flex-1"
-                            alt="Line"
-                            src="https://c.animaapp.com/mpv8f0th9epBAX/img/line.svg"
-                          />
-                        </div>
-                        <ul className="flex flex-col gap-[15.5px]">
-                          {plan.features.map((feature, index) => (
-                            <li
-                              key={`${plan.name}-feature-${index}`}
-                              className="flex items-start gap-[11.61px]"
-                            >
-                              <img
-                                className="mt-[1px] h-[25.25px] w-[23.25px] shrink-0"
-                                alt="Included"
-                                src="https://c.animaapp.com/mpv8f0th9epBAX/img/div-w-5-margin.svg"
-                              />
-                              <span className="whitespace-pre-line [font-family:'Inter',Helvetica] text-[17.4px] font-normal leading-[24.4px] tracking-[0] text-[#58585f]">
-                                {feature}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <footer className="pt-5">
-                    <div className="flex flex-col gap-4">
-                      <div className="relative overflow-hidden rounded-2xl bg-[#ffffff12] p-4">
-                        <div className="flex flex-col gap-4">
-                          <div className="[font-family:'Inter',Helvetica] text-[17.4px] font-normal leading-6 tracking-[0] text-[#2a2a3a]">
-                            Your Investment:
-                          </div>
-                          <div className="flex flex-col gap-1.5">
-                            <p className="[font-family:'Inter',Helvetica] text-2xl font-medium leading-7 tracking-[0]">
-                              <span className="text-[#2a2a3a]">Own Name: </span>
-                              <span className="text-[#1544ea]">
-                                {plan.investment.ownName}
-                              </span>
-                            </p>
-                            <p className="[font-family:'Inter',Helvetica] text-2xl font-medium leading-7 tracking-[0]">
-                              <span className="text-[#2a2a3a]">
-                                With Nominee:{" "}
-                              </span>
-                              <span className="text-[#1544ea]">
-                                {plan.investment.nominee}
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        {plan.highlighted && (
-                          <div
-                            aria-hidden="true"
-                            className="pointer-events-none absolute bottom-[-174px] left-[-201px] h-[264px] w-[264px] rounded-full bg-[#1544ea] blur-[31px]"
-                          />
-                        )}
-                      </div>
-                      <Button
-                        type="button"
-                        className={`h-9 w-full rounded-[96.88px] px-[23.25px] py-[13px] [font-family:'Inter',Helvetica] text-[15.5px] font-normal leading-6 tracking-[0] shadow-[0px_1px_2px_#0000000d] ${
-                          plan.featured
-                            ? "bg-[#1544ea] text-white hover:bg-[#1544ea]/90 shadow-[0px_0.97px_1.94px_#0d0d120f]"
-                            : "border border-solid border-[#1544ea4c] bg-[#1544ea1a] text-[#1544ea] hover:bg-[#1544ea26]"
-                        }`}
-                        variant="ghost"
-                      >
-                        {plan.cta}
-                      </Button>
-                    </div>
-                  </footer>
-                </CardContent>
-              </Card>
-            </article>
-          ))}
+              <div className="absolute left-[3.5px] bottom-[-68px] w-[326px] h-[80px] rounded-[326px] bg-[#D9D9D9] blur-[27px]"></div>
+              <span className="relative [font-family:'Inter',Helvetica] font-[300] text-[#ffffff] text-[11px] lg:text-[17px] tracking-[-0.36px] leading-tight sm:leading-7 text-center sm:whitespace-nowrap">
+                Escape Stripe/PayPal/Shopify Bans – Unlock a Stable PSP Setup
+              </span>
+            </a>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-2 lg:gap-7 md:inline-flex md:items-start">
+            {features.map((feature, index) => (
+              <Badge key={index} variant="outline" className={`h-auto md:h-10 inline-flex items-center gap-2 px-3 md:px-4 lg:py-2 py-0 rounded-xl backdrop-blur-[2px] border-0 ${index > 0 ? "md:ml-[-18px]" : ""}`}>
+                <span className="[font-family:'Inter',Helvetica] font-normal text-green-400 text-sm md:text-base text-center tracking-[0] leading-6 whitespace-nowrap">✓</span>
+                <span className="opacity-90 [font-family:'Inter',Helvetica] font-normal text-[#1D1C20] text-xs md:text-[15px] text-center tracking-[0] leading-6 whitespace-nowrap">{feature.text}</span>
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
+      <Image className="absolute top-[366px] left-[-100px] w-[891px] h-[366px] hidden lg:block opacity-50" alt="Rectangle" src="/GreenRectangle2.svg" width={891} height={366} />
+      <Image className="absolute top-[372px] left-[358px] w-[1071px] h-[380px] hidden lg:block opacity-50" alt="Rectangle" src="/GreenRectangle.svg" width={1071} height={380} />
     </section>
   );
 };

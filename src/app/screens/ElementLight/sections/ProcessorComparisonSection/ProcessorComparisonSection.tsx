@@ -1,85 +1,62 @@
-import * as React from "react";
-import { Badge } from "../../../../components/ui/badge";
-import { Button } from "../../../../components/ui/button";
-import { Card, CardContent } from "../../../../components/ui/card";
+"use client";
+import React from "react";
 
-const featureItems = [
-  "Backed by insiders",
-  "Backed by insiders",
-  "Trusted by 7‑figure businesses",
-];
-
-export const ProcessorComparisonSection = (): React.JSX.Element => {
+export const ProcessorComparisonSection = () => {
   return (
-    <section className="relative w-full px-4 py-10 sm:px-6 lg:px-0">
-      <div className="mx-auto w-full max-w-[1238px]">
-        <Card className="relative overflow-hidden rounded-3xl border-0 bg-[#f4f4fe] shadow-none backdrop-blur-[29px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(29px)_brightness(100%)]">
-          <CardContent className="relative flex flex-col items-center gap-[17.89px] px-6 py-[39px] sm:px-8">
-            <header className="flex w-full flex-col items-center">
-              <Badge className="relative inline-flex h-auto items-center gap-1.5 rounded-[48px] border border-green-400 bg-[#4ade801a] px-3 py-2 text-green-400 shadow-[0px_1px_2px_-1px_#0000001a,0px_1px_3px_#0000001a] hover:bg-[#4ade801a]">
-                <img
-                  className="relative h-4 w-4"
-                  alt="Frame"
-                  src="https://c.animaapp.com/mpv8f0th9epBAX/img/frame-16.svg"
-                />
-                <span className="flex items-center justify-center [font-family:'Inter',Helvetica] text-base font-normal leading-6 tracking-[0] text-green-400">
-                  Smart Strategy
-                </span>
-              </Badge>
-            </header>
-            <div className="flex w-full max-w-[974px] flex-col items-center gap-10">
-              <div className="flex w-full max-w-[974px] flex-col items-center px-2">
-                <h2 className="w-fit bg-[linear-gradient(90deg,rgba(74,222,128,1)_0%,rgba(29,28,32,1)_100%)] bg-clip-text text-center [font-family:'Cambo',Helvetica] text-[28px] font-normal leading-[1.2] tracking-[0] text-transparent [-webkit-text-fill-color:transparent] sm:text-[34px] lg:text-[40px] lg:leading-[47.6px]">
-                  Smart entrepreneurs don&#39;t play roulette with
-                  <br />
-                  Stripe. They choose a Hong Kong PSP setup
-                  <br />
-                  engineered by insiders for guaranteed
-                  <br />
-                  reliability.
-                </h2>
-              </div>
-              <div className="flex w-full flex-col items-center gap-6">
-                <div className="flex w-full items-center justify-center">
-                  <Button
-                    type="button"
-                    className="relative h-auto max-w-full overflow-hidden rounded-xl bg-[#1544ea] px-5 py-3 text-center shadow-none hover:bg-[#1544ea]"
-                  >
-                    <span className="absolute bottom-[-68px] left-1 h-20 w-[326px] rounded-[326px] bg-[#d9d9d9] blur-[13.5px]" />
-                    <span className="relative flex items-center justify-center [font-family:'Inter',Helvetica] text-center text-[15px] font-light leading-7 tracking-[-0.36px] text-white sm:text-[17px]">
-                      Escape Stripe/PayPal/Shopify Bans – Unlock a Stable PSP
-                      Setup
-                    </span>
-                  </Button>
-                </div>
-                <ul className="inline-flex flex-wrap items-start justify-center gap-x-[10px] gap-y-2">
-                  {featureItems.map((item, index) => (
-                    <li key={`${item}-${index}`} className="flex">
-                      <div className="inline-flex h-10 items-center gap-2 rounded-xl px-4 py-2 backdrop-blur-[1px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(1px)_brightness(100%)]">
-                        <span className="flex items-center justify-center [font-family:'Inter',Helvetica] text-base font-normal leading-6 tracking-[0] text-green-400">
-                          ✓
-                        </span>
-                        <span className="opacity-90 [font-family:'Inter',Helvetica] text-[15px] font-normal leading-6 tracking-[0] text-[#1d1c20]">
-                          {item}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <section className="w-full bg-white text-[#1d1c20] py-12 sm:py-[70px] px-4">
+      <div className="max-w-[1237px] mx-auto text-center">
+        <div className="inline-block px-4 py-1.5 rounded-full text-sm text-white text-center mx-auto bg-[linear-gradient(89deg,#1644EB_0%,#809CFF_80.28%)] [font-family:'Inter',Helvetica] backdrop-blur-[16px] mb-[16px]">
+          Here&apos;s Why You&apos;re Exposed
+        </div>
+        <div className="flex flex-col gap-[42px]">
+          <div className="w-full">
+            <div className="text-center [font-family:'Cambo',Helvetica] md:text-[52px] lg:text-[70px] text-[32px] leading-[120%] font-normal">
+              <span className="text-[#1d1c20]">
+                Stripe, Standard PayPal &<br className="sm:block hidden" />Western Processors Were<br />
+              </span>
+              <span className="bg-[radial-gradient(closest-side,#1544ea_0%,rgba(29,28,32,1)_100%)] bg-clip-text text-transparent">
+                Never Built for Scaling<br className="sm:block hidden" />eCommerce
+              </span>
             </div>
-            <img
-              className="pointer-events-none absolute bottom-[-170px] left-[-100px] w-[891px] max-w-none"
-              alt="Rectangle"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-2.svg"
-            />
-            <img
-              className="pointer-events-none absolute bottom-[-186px] left-[28%] w-[1071px] max-w-none"
-              alt="Rectangle"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-1.svg"
-            />
-          </CardContent>
-        </Card>
+          </div>
+          <div>
+            <p className="text-[#58585f] [font-family:'Inter',Helvetica] text-center max-w-[999px] mx-auto mb-[48px] font-[300] text-base md:text-[18px]">
+              They were built for SaaS companies charging $49/month with near-zero chargebacks. The moment you start scaling — running aggressive offers, doing high volume, processing internationally — you become a liability to them. Their risk model literally classifies you the same way they classify fraud.
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full">
+          <div className="relative rounded-3xl overflow-hidden border border-[#1544ea33] bg-gradient-to-br from-[#f4f4fe] to-[rgba(21,68,234,0.02)]">
+            <div className="absolute right-[-319px] bottom-[-42.764px] w-[300px] h-[399px] bg-[#1544ea] blur-[97px] opacity-20"></div>
+            <div className="relative z-10">
+              <div className="grid md:grid-cols-[1fr_1fr_1fr] grid-cols-[0.6fr_1fr_1fr] border-b border-[#1544ea22]">
+                <div className="p-5 text-[#1d1c20] text-[12px] md:text-[24px] text-left">Feature</div>
+                <div className="p-5 text-[#00A63E] md:text-[24px] text-[12px] font-medium border-x border-[#1544ea22] text-left">MuteTaxes HK Setup</div>
+                <div className="p-5 text-[#FF6067] font-medium md:text-[24px] text-[12px] text-left">Standard Processors</div>
+              </div>
+              {[
+                { title: "Account Stability", good: "Rock-solid. 8+ years. Zero bans.", bad: "Random bans with zero warning" },
+                { title: "Fund Freezes", good: "Funds hit your account like clockwork", bad: "90–180 day holds, no recourse" },
+                { title: "Scaling Limits", good: "Built to process $1M+/month", bad: "Flagged the moment you grow" },
+                { title: "PayPal Access", good: "Verified HK Business PayPal the most stable tier on the planet", bad: "Weak. Personal. Easily limited." },
+                { title: "Tax Efficiency", good: "8.25% HK corporate rate — legally optimized", bad: "Full domestic tax exposure" },
+              ].map((row, i) => (
+                <div key={i} className="grid md:grid-cols-[1fr_1fr_1fr] grid-cols-[0.6fr_1fr_1fr] border-b last:border-none border-[#1544ea22]">
+                  <div className="md:p-5 p-2 md:text-[20px] text-[10px] font-normal text-left text-[#1d1c20]">{row.title}</div>
+                  <div className="md:p-5 p-2 flex items-center gap-3 text-[#1d1c20] border-x border-[#1544ea22]">
+                    <span className="w-5 h-5 shrink-0 flex items-center justify-center rounded-full bg-green-500 text-black text-xs">✔</span>
+                    <p className="lg:text-[14px] text-[12px] font-[300] text-left">{row.good}</p>
+                  </div>
+                  <div className="md:p-5 p-2 flex items-center gap-3 text-[14px]">
+                    <span className="w-5 h-5 shrink-0 flex items-center justify-center rounded-full bg-red-500 text-white text-xs">✕</span>
+                    <p className="lg:text-[14px] text-[12px] font-[300] text-left text-[#58585f]">{row.bad}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

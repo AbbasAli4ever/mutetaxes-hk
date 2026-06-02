@@ -1,131 +1,201 @@
-import * as React from "react";
+"use client";
+import { useState } from "react";
+import Image from "next/image";
 import { Card, CardContent } from "../../../../components/ui/card";
+import { Badge } from "../../../../components/ui/badge";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, FreeMode } from "swiper/modules";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { testimonials, videoTestimonials } from "../../../../data/testimonials";
+import TestimonialCard from "../../../../components/ui/TestimonialCard";
 
-const testimonials = [
-  {
-    text: "Working with SwiftNine Limited has been absolutely amazing! They handled our HK setup professionally from start to finish.",
-    footerImage: "https://c.animaapp.com/mpv8f0th9epBAX/img/div-relative-1.svg",
-  },
-  {
-    text: "Had a really great experience with SwiftNine! Great service and would recommend to my friends and family.",
-    footerImage: "https://c.animaapp.com/mpv8f0th9epBAX/img/div-relative-1.svg",
-  },
-  {
-    text: "The perfect partner for all e-commerce solutions. Especially when it comes to Hong Kong setups, Swiftnine offers the best and most affordable service in the area. A big thank you to Swiftnine; I can only recommend them to everyone and would gladly use them again!",
-    footerImage: "https://c.animaapp.com/mpv8f0th9epBAX/img/div-relative-1.svg",
-  },
-  {
-    text: "SWIFTNINE is absolutely outstanding! 🌟🌟🌟 Their assistance was incredibly helpful, and I couldn't be more satisfied. 🤝🙂",
-    footerImage: "https://c.animaapp.com/mpv8f0th9epBAX/img/div-relative-1.svg",
-  },
-  {
-    text: "Topnotch service! Fast response with fast delivery. The support is amazing as well, I had no issues or anything during the process! I highly recommend it!",
-    stars: "https://c.animaapp.com/mpv8f0th9epBAX/img/stars.svg",
-    author: "Selim Onbekend",
-    avatar: "https://c.animaapp.com/mpv8f0th9epBAX/img/selim-onbekend.png",
-  },
-  {
-    text: "Working with SwiftNine Limited was an absolute pleasure. They handled our Hong Kong company setup professionally from start to finish. Every step — from documentation to communication with local authorities — was smooth, fast, and transparent.",
-    stars: "https://c.animaapp.com/mpv8f0th9epBAX/img/stars.svg",
-    author: "Davidsantoos YT",
-    avatar: "https://c.animaapp.com/mpv8f0th9epBAX/img/davidsantoos-yt.png",
-  },
-  {
-    text: "I had an amazing experience with SwiftNine Limited – their service is absolutely outstanding. They helped me set up a Hong Kong company (HKA), open a bank account, and navigate the whole process with impressive speed and efficiency. Compared to other providers, their pricing is unbeatable – it's honestly a no-brainer.",
-    stars: "https://c.animaapp.com/mpv8f0th9epBAX/img/stars.svg",
-    author: "gli mea",
-    avatar: "https://c.animaapp.com/mpv8f0th9epBAX/img/gli-mea.png",
-  },
+const employeeData = [
+  { title: "Airwallex Support Coordinator", image: "/AirwallexSupportCoordinator.png" },
+  { title: "Airwallex Support Coordinator", image: "/AirwallexSupportCoordinator1.png" },
+  { title: "Airwallex Support Coordinator", image: "/AirwallexSupportCoordinator3.png" },
+  { title: "Airwallex Support Coordinator", image: "/AirwallexSupportCoordinator11.png" },
+  { title: "Airwallex Support Coordinator", image: "/AirwallexSupportCoordinator14.png" },
+  { title: "Banking Support Coordinator", image: "/BankingSupportCoordinator.png" },
+  { title: "Banking Support Coordinator", image: "/BankingSupportCoordinator1.png" },
+  { title: "Banking Support Coordinator", image: "/BankingSupportCoordinator2.png" },
+  { title: "Company Registration Specialist", image: "/CompanyRegistrationSpecialist.png" },
+  { title: "Customer Success Assistant", image: "/CustomerSuccessAssistant15.png" },
+  { title: "PayPal Support Coordinator", image: "/PayPalSupportCoordinator.png" },
+  { title: "PayPal Support Coordinator", image: "/PayPalSupportCoordinator8.png" },
+  { title: "PayPal Support Coordinator", image: "/PayPalSupportCoordinator15.png" },
 ];
 
-export const HongKongPspSpecialistSection = (): React.JSX.Element => {
-  return (
-    <section className="flex w-full flex-col items-center gap-[50px] px-4 py-[70px] md:px-6">
-      <header className="flex w-full max-w-[1440px] flex-col items-center">
-        <div className="inline-flex items-center justify-center rounded-[32px] bg-[linear-gradient(61deg,rgba(22,68,235,1)_0%,rgba(128,156,255,1)_80%)] px-[15px] py-[5px] shadow-[inset_0px_-7px_11px_1px_#a48fff1f,0px_4px_24px_#00000040] backdrop-blur-[1px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(1px)_brightness(100%)]">
-          <p className="[font-family:'Inter',Helvetica] text-center text-sm font-medium leading-5 tracking-[0] text-white">
-            Wall of love
-          </p>
-        </div>
-        <div className="flex w-full flex-col items-center px-0 pb-0 pt-4">
-          <img
-            className="h-auto w-full max-w-[546px]"
-            alt="Our clients come first, always"
-            src="https://c.animaapp.com/mpv8f0th9epBAX/img/our-clients-come-first--always.svg"
-          />
-        </div>
-        <div className="flex w-full max-w-[600px] flex-col items-center">
-          <p className="[font-family:'Inter',Helvetica] text-center text-base font-light leading-6 tracking-[0] text-[#58585f]">
-            We take pride in the moment our clients become our friends.
-          </p>
-        </div>
-      </header>
-      <img
-        className="w-full max-w-[1216px]"
-        alt="Section divider"
-        src="https://c.animaapp.com/mpv8f0th9epBAX/img/div-relative.svg"
-      />
-      <div className="relative w-full max-w-[1216px] overflow-hidden">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {testimonials.map((testimonial, index) => (
-            <Card
-              key={`testimonial-${index}`}
-              className="h-full rounded-[17px] border border-solid border-[#ddddf7] bg-[#f4f4fe] shadow-none"
-            >
-              <CardContent className="flex h-full min-h-[341.6px] flex-col justify-between p-0">
-                <div className="flex flex-1 flex-col items-start p-5">
-                  {testimonial.stars ? (
-                    <img
-                      className="w-full flex-none"
-                      alt="Stars"
-                      src={testimonial.stars}
-                    />
-                  ) : (
-                    <div className="h-[17.83px] w-full" />
-                  )}
+export const HongKongPspSpecialistSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-                  <div className="flex w-full flex-1 flex-col pt-2">
-                    <p
-                      className={`[font-family:'Inter',Helvetica] text-sm font-normal leading-5 tracking-[0] ${
-                        testimonial.stars
-                          ? "text-[#58585f]"
-                          : "text-neutral-400"
-                      }`}
-                    >
-                      {testimonial.text}
-                    </p>
-                  </div>
-                </div>
-                {testimonial.author && testimonial.avatar ? (
-                  <footer className="flex w-full items-center gap-4 p-5">
-                    <div className="flex h-8 w-8 items-start justify-center overflow-hidden rounded-full">
-                      <div
-                        className="h-full w-full bg-cover bg-[50%_50%]"
-                        style={{
-                          backgroundImage: `url(${testimonial.avatar})`,
-                        }}
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col items-start">
-                      <p className="[font-family:'Inter',Helvetica] mt-[-1.00px] flex self-stretch text-xs font-medium leading-4 tracking-[0] text-[#f4f0ff]">
-                        {testimonial.author}
-                      </p>
-                      <div className="h-5 w-full" />
-                    </div>
-                  </footer>
-                ) : (
-                  <img
-                    className="w-full"
-                    alt="Testimonial footer"
-                    src={testimonial.footerImage}
-                  />
-                )}
-              </CardContent>
-            </Card>
-          ))}
+  // Testimonials / GSAP
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const swiperSectionRef = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [mutedStates, setMutedStates] = useState(videoTestimonials.map((vid) => vid.muted));
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+
+  const toggleMute = (index: number) => {
+    const currentlyMuted = mutedStates[index];
+    const newMutedStates = mutedStates.map((_, i) => (i === index ? !currentlyMuted : true));
+    setMutedStates(newMutedStates);
+    videoRefs.current.forEach((vid, i) => { if (vid) vid.muted = newMutedStates[i]; });
+  };
+
+  useEffect(() => {
+    const swiperSection = swiperSectionRef.current;
+    if (!swiperSection) return;
+    let showTimer: ReturnType<typeof setTimeout>;
+    let hideTimer: ReturnType<typeof setTimeout>;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          showTimer = setTimeout(() => {
+            setShowSwipeHint(true);
+            hideTimer = setTimeout(() => setShowSwipeHint(false), 5000);
+          }, 3000);
+          observer.unobserve(swiperSection);
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(swiperSection);
+    return () => { observer.disconnect(); clearTimeout(showTimer); clearTimeout(hideTimer); };
+  }, []);
+
+  useEffect(() => {
+    const row = row1Ref.current;
+    if (!row) return;
+    const totalWidth = row.scrollWidth / 2;
+    gsap.set(row, { x: 0 });
+    const tl = gsap.to(row, {
+      x: -totalWidth, duration: 40, ease: "none", repeat: -1,
+      modifiers: { x: gsap.utils.unitize((value) => { const v = parseFloat(value); return v <= -totalWidth ? v + totalWidth : v; }) },
+    });
+    const wrapper = wrapperRef.current;
+    const slowDown = () => tl.timeScale(0.2);
+    const speedUp = () => tl.timeScale(1);
+    wrapper?.addEventListener("mouseenter", slowDown);
+    wrapper?.addEventListener("mouseleave", speedUp);
+    return () => { wrapper?.removeEventListener("mouseenter", slowDown); wrapper?.removeEventListener("mouseleave", speedUp); tl.kill(); };
+  }, []);
+
+  return (
+    <section className="flex flex-col items-center w-full py-[40px] lg:py-[70px]">
+      {/* Team carousel heading */}
+      <div className="flex flex-col w-full max-w-[1315px] gap-[19.31px] px-4">
+        <div className="flex flex-col items-center w-full">
+          <h2 className="[font-family:'Cambo',Helvetica] font-normal sm:px-0 px-2 text-[32px] leading-[34px] sm:leading-[42px] md:leading-[50px] lg:leading-[58px] xl:leading-[120%] lg:text-[70px] text-center tracking-[-1.45px]">
+            <span className="bg-gradient-to-r from-[rgba(21,68,234,1)] to-[rgba(29,28,32,1)] bg-clip-text text-transparent tracking-[-0.81px]">
+              We Take You From Zero to a <br className="sm:block hidden" />Fully{" "}
+            </span>
+            <span className="text-[#1d1c20] font-normal tracking-[-0.81px]">Activated Hong Kong PSP</span>
+          </h2>
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,1)_0%,rgba(255,255,255,0)_12%,rgba(255,255,255,0)_88%,rgba(255,255,255,1)_100%)]" />
+        <p className="max-w-[840px] mx-auto flex flex-col items-center font-[300] text-[#58585f] md:text-[18px] text-md text-center tracking-[0] leading-6">
+          A Hong Kong PSP setup is a compliance maze... strict rules, banking barriers, and hidden requirements that most entrepreneurs aren&apos;t prepared for.
+        </p>
+      </div>
+
+      <h2 className="[font-family:'Cambo',Helvetica] text-[26px] lg:text-[41px] text-center mx-10 leading-[64.9px] font-normal bg-[linear-gradient(138deg,rgba(21,68,234,1)_0%,#1d1c20_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] mt-8">
+        Our Onboarding Team
+      </h2>
+
+      {/* Team Swiper */}
+      <div className="w-full max-w-[1440px] relative mt-4">
+        <Swiper
+          modules={[Navigation, Autoplay, FreeMode]}
+          loop={true}
+          autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+          speed={2000}
+          freeMode={true}
+          spaceBetween={20}
+          slidesPerView={1}
+          breakpoints={{ 640: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, 1440: { slidesPerView: 4 } }}
+        >
+          {employeeData.map((employee, index) => (
+            <SwiperSlide key={index}>
+              <Card className="w-full h-[366px] bg-transparent border-0 overflow-hidden cursor-pointer" onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
+                <CardContent className="relative w-full h-full p-0">
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image className="w-full h-auto object-cover" alt={employee.title} src={employee.image} width={800} height={600} />
+                    <div className={`absolute bottom-0 lg:bottom-10 xl:bottom-5 left-0 right-0 h-[60%] bg-gradient-to-t from-black/80 via-black/40 to-transparent hidden md:block transition-opacity duration-300 ${hoveredIndex === index ? "opacity-100" : "opacity-0"}`} />
+                    <div className={`absolute bottom-0 lg:bottom-10 xl:bottom-6 left-0 right-0 px-3 transition-all duration-300 ${hoveredIndex === index ? "md:opacity-100 md:translate-y-0" : "md:opacity-0 md:translate-y-4"}`}>
+                      <p className="[font-family:'Inter',Helvetica] text-white text-center font-medium text-sm tracking-[0] leading-5 whitespace-nowrap drop-shadow-md">
+                        {employee.title}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+
+      {/* Testimonials heading */}
+      <div className="relative w-full max-w-[1440px] text-center mt-16 px-4">
+        <Badge className="bg-[#f4f4fe] mb-4 mx-auto flex justify-center w-fit rounded-[32px] border border-solid border-[#1544ea33] shadow-[inset_0px_-7px_11px_#1544ea1f] backdrop-blur-[2px] px-[15px] py-[5px]">
+          <span className="font-medium text-[#1544ea] text-sm">Wall of love</span>
+        </Badge>
+        <h2 className="[font-family:'Cambo',Helvetica] font-normal text-[36px] leading-[34px] sm:text-[70px] sm:leading-[48px] md:leading-[58px] lg:leading-[120%] text-transparent bg-clip-text bg-[radial-gradient(50%_50%_at_44%_21%,rgba(21,68,234,1)_0%,rgba(29,28,32,1)_100%)]">
+          <span className="bg-[radial-gradient(38.63%_62.02%_at_43.72%_70.95%,#1544ea_10%,#1d1c20_100%)] bg-clip-text text-transparent">Our Clients Come</span>
+          <br />First, <span className="[font-family:'Cambo',Helvetica] font-normal">Always</span>
+        </h2>
+        <p className="text-[#58585f] font-[300] text-[14px] sm:text-[16px] max-w-[600px] mx-auto">We take pride in the moment our clients become our friends.</p>
+      </div>
+
+      {/* Video Swiper */}
+      <div ref={swiperSectionRef} className="relative w-full max-w-[1216px] px-2 lg:px-2 mt-10">
+        {showSwipeHint && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] sm:hidden pointer-events-none">
+            <Image src="/videos/swipeleftgif.gif" alt="Swipe left hint" className="w-24 h-24 drop-shadow-2xl" width={96} height={96} unoptimized />
+          </div>
+        )}
+        <Swiper
+          modules={[Navigation]}
+          navigation={{ nextEl: ".nextBtn", prevEl: ".prevBtn" }}
+          spaceBetween={20}
+          slidesPerView={1}
+          loop={true}
+          breakpoints={{ 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+          className="w-full h-[480px]"
+        >
+          {videoTestimonials.map((vid, index) => (
+            <SwiperSlide key={index}>
+              <Card className="relative w-full h-[480px] bg-[#171717] rounded-[20px] border-[15px] border-[#171717] overflow-hidden">
+                <CardContent className="relative w-full h-full p-0 rounded-[20px]">
+                  <video
+                    ref={(el) => { videoRefs.current[index] = el; }}
+                    className="absolute inset-0 object-cover w-full h-full rounded-[20px]"
+                    src={vid.video} autoPlay loop muted={mutedStates[index]} playsInline
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 rounded-[20px] to-transparent" />
+                  <button onClick={() => toggleMute(index)} className="absolute z-20 flex hidden items-center justify-center w-10 h-10 text-white rounded-full top-4 right-4 bg-white/20 backdrop-blur-md">
+                    <Image src={mutedStates[index] ? "/mute.png" : "/unmute.png"} className="w-5 h-5" alt={mutedStates[index] ? "Muted" : "Unmuted"} width={20} height={20} />
+                  </button>
+                </CardContent>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <button className="prevBtn hidden sm:flex absolute left-[-50px] top-1/2 -translate-y-1/2 z-[60] bg-white/15 hover:bg-white/25 backdrop-blur-md text-white rounded-full items-center justify-center">
+          <Image src="/left-arrow.svg" alt="Previous" className="w-10 h-10 object-contain" width={60} height={60} />
+        </button>
+        <button className="nextBtn hidden sm:flex absolute right-[-50px] top-1/2 -translate-y-1/2 z-[60] bg-white/15 hover:bg-white/25 backdrop-blur-md text-white rounded-full items-center justify-center">
+          <Image src="/right-arrow.svg" alt="Next" className="w-10 h-10 object-contain" width={60} height={60} />
+        </button>
+      </div>
+
+      {/* GSAP Scroller */}
+      <div ref={wrapperRef} className="relative w-full max-w-[1216px] h-[330px] lg:h-[285px] overflow-hidden mt-10">
+        <div ref={row1Ref} className="absolute top-0 left-0 flex flex-row items-center gap-6 w-max">
+          {testimonials.map((t, i) => <TestimonialCard key={`t1-${i}`} {...t} />)}
+          {testimonials.map((t, i) => <TestimonialCard key={`t2-${i}`} {...t} />)}
+        </div>
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-white/80 via-transparent to-white/80" />
       </div>
     </section>
   );

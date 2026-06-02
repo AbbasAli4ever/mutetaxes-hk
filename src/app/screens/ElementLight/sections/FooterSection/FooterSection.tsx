@@ -1,84 +1,47 @@
-import * as React from "react";
-import { Card, CardContent } from "../../../../components/ui/card";
+"use client";
+import { MailIcon, PhoneIcon } from "lucide-react";
+import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
+import Image from "next/image";
 
-const featureItems = [
-  "2500+ Successful Setups",
-  "€100M+ Processed Monthly",
-  "4 Years of Excellence",
-  "24/7 Support Guarantee",
-];
+const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
 
-const contactItems = [
-  {
-    text: "info@MuteTaxes.com",
-    icon: "https://c.animaapp.com/mpv8f0th9epBAX/img/frame-13.svg",
-    href: "mailto:info@MuteTaxes.com",
-  },
-  {
-    text: "WhatsApp: +44 7848 102776",
-    icon: "https://c.animaapp.com/mpv8f0th9epBAX/img/frame-14.svg",
-    href: "https://wa.me/447848102776",
-  },
-];
+const achievements = ["2500+ Successful Setups", "€100M+ Processed Monthly", "4 Years of Excellence", "24/7 Support Guarantee"];
 
-export const FooterSection = (): React.JSX.Element => {
+export const FooterSection = () => {
   return (
-    <footer className="relative w-full border-t border-[#9767e433] bg-black px-4 pt-12 pb-12 sm:px-6 lg:px-12 xl:px-36">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-        <Card className="border-0 bg-transparent shadow-none">
-          <CardContent className="grid gap-12 p-0 md:grid-cols-2 md:items-start">
-            <section className="flex min-w-0 flex-col items-start gap-4">
-              <div
-                className="h-[43.5px] w-[214px] max-w-[520px] bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage:
-                    "url(https://c.animaapp.com/mpv8f0th9epBAX/img/swiftnine-logo.png)",
-                }}
-                aria-label="MuteTaxes logo"
-                role="img"
-              />
-              <p className="[font-family:'Inter',Helvetica] text-lg font-normal leading-7 tracking-[0] text-zinc-400">
-                Your Gateway to Global eCommerce
-              </p>
-              <ul className="flex w-full flex-col items-start gap-2">
-                {featureItems.map((item) => (
-                  <li key={item} className="flex w-full items-center gap-2">
-                    <span className="[font-family:'Inter',Helvetica] text-sm font-normal leading-5 tracking-[0] text-green-400">
-                      ✅
-                    </span>
-                    <span className="[font-family:'Inter',Helvetica] text-sm font-normal leading-5 tracking-[0] text-neutral-50">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-            <section className="flex min-w-0 flex-col items-start gap-4">
-              <h2 className="[font-family:'Inter',Helvetica] text-xl font-normal leading-7 tracking-[0] text-neutral-50">
-                Get In Touch
-              </h2>
-              <address className="flex w-full not-italic flex-col items-start gap-3">
-                {contactItems.map((item) => (
-                  <a
-                    key={item.text}
-                    href={item.href}
-                    className="flex w-full items-center gap-3 transition-opacity hover:opacity-80"
-                  >
-                    <img className="h-5 w-5" alt="" src={item.icon} />
-                    <span className="[font-family:'Inter',Helvetica] text-base font-normal leading-6 tracking-[0] text-zinc-400">
-                      {item.text}
-                    </span>
-                  </a>
-                ))}
-              </address>
-            </section>
-          </CardContent>
-        </Card>
-        <div className="border-t border-[#9767e433] pt-8">
-          <p className="[font-family:'Inter',Helvetica] text-center text-sm font-normal leading-5 tracking-[0] text-zinc-400">
-            © 2026 MuteTaxes. Turning payment problems into profit
-            opportunities.
-          </p>
+    <footer className="relative flex flex-col w-full pt-[49px] pb-12 px-4 xl:px-36 bg-black">
+      <div className="relative z-10 flex flex-col w-full gap-8">
+        <div className="flex flex-col p-2 md:p-8 w-full gap-10 lg:flex-row lg:gap-12 max-w-[1152px] mx-auto">
+          <div className="flex flex-col w-full lg:w-[520px] gap-4">
+            <Image className="w-[160px] lg:w-[214px] h-auto" alt="MuteTaxes Logo" src="/logo-w.png" width={800} height={600} />
+            <p className="font-normal text-[#A1A1AA] text-base lg:text-lg leading-6 lg:leading-7">Your Gateway to Global eCommerce</p>
+            <div className="flex flex-col gap-2">
+              {achievements.map((achievement, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <span className="text-sm text-green-400">✅</span>
+                  <span className="text-[#FAFAFA] text-sm">{achievement}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col w-full lg:w-[520px] gap-4">
+            <h4 className="text-[#FAFAFA] text-lg lg:text-xl">Get In Touch</h4>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <MailIcon className="w-5 h-5 text-[#A1A1AA]" />
+                <span className="text-[#A1A1AA] text-sm lg:text-base">info@MuteTaxes.com</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <PhoneIcon className="w-5 h-5 text-[#A1A1AA]" />
+                <a onClick={() => openWhatsAppWithUtm(WA_NUMBERS, "mutetaxes-hk")} style={{ cursor: "pointer" }} className="text-[#A1A1AA] hover:text-[#1544ea] transition-colors text-sm lg:text-base">
+                  WhatsApp: +44 7848 102776
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="pt-8 w-full border-t border-[#9767e433]">
+          <p className="text-center text-[#A1A1AA] text-xs lg:text-sm">© 2026 MuteTaxes. Turning payment problems into profit opportunities.</p>
         </div>
       </div>
     </footer>

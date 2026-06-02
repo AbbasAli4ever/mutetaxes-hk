@@ -1,309 +1,146 @@
-import * as React from "react";
-import { Badge } from "../../../../components/ui/badge";
-import { Card, CardContent } from "../../../../components/ui/card";
+"use client";
+import { useState } from "react";
+import { Button } from "../../../../components/ui/button";
+import { Modal } from "../../../../components/ui/Modal";
+import Image from "next/image";
+import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const topCards = [
-  {
-    title: (
-      <>
-        Your account has
-        <br />
-        been suspended
-      </>
-    ),
-    description: (
-      <>
-        You wake up to the &quot;Your account
-        <br />
-        has been suspended&quot; email. No
-        <br />
-        warning. No explanation. Just…
-        <br />
-        done.
-      </>
-    ),
-    content: (
-      <div className="relative h-[209.44px] w-[239px] shrink-0">
-        <div className="absolute left-0 top-0 flex h-[173px] w-[216px] flex-col items-start gap-[18px] rounded-[15px] border-[1.56px] border-solid border-[#ffffff0a] bg-[#e1e4e8] pl-[20.25px] pr-[92.27px] py-[18px]">
-          <div className="inline-flex items-center gap-[9px]">
-            <img
-              className="h-[63.26px] w-[63.26px] rounded-[14px] object-cover"
-              alt="Image"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/image-2.png"
-            />
-          </div>
-          <div className="flex w-full flex-col items-start gap-[9px]">
-            <div className="flex w-full flex-col items-start justify-center gap-[11.25px]">
-              <div className="mt-[-1.13px] w-fit whitespace-nowrap text-center text-[24.8px] font-normal leading-[27.2px] tracking-[0] text-[#d03232] [font-family:'Sharp_Grotesk_PE_Trial_Book-20',Helvetica]">
-                $547,39
-              </div>
-              <div className="w-fit whitespace-nowrap text-center text-[15.8px] font-light leading-[17.3px] tracking-[0] text-[#58585f] [font-family:'Manrope',Helvetica]">
-                Stripe
-              </div>
+const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+
+const paymentLogos = [
+  { alt: "Paypal", src: "/paypal.svg", imgClass: "w-[60px] h-[48px] sm:w-[80px] sm:h-[64px] md:w-[100px] md:h-[78px] xl:w-[113px] xl:h-[88px]" },
+  { alt: "Payoneer", src: "/payooner.svg", imgClass: "w-[60px] h-[48px] sm:w-[80px] sm:h-[64px] md:w-[100px] md:h-[78px] xl:w-[113px] xl:h-[88px]" },
+  { alt: "Airwallex", src: "/airwallex.svg", imgClass: "w-[60px] h-[48px] sm:w-[80px] sm:h-[64px] md:w-[100px] md:h-[78px] xl:w-[113px] xl:h-[88px]" },
+  { alt: "Ocean", src: "/occean.svg", imgClass: "w-[65px] h-[52px] sm:w-[85px] sm:h-[68px] md:w-[108px] md:h-[84px] xl:w-[122px] xl:h-[94px]" },
+];
+
+const featureBadgesRow1 = [
+  { icon: "/blue-tick.svg", text: "Processor frozen your funds? We fix it." },
+  { icon: "/blue-tick.svg", text: "Verified HK PayPal — world's most stable" },
+];
+
+const featureBadgesRow2 = [
+  { icon: "/blue-tick.svg", text: "Global payments, simplified" },
+];
+
+export const HeroSection = () => {
+  const [showCalendly, setShowCalendly] = useState(false);
+  const handleWhatsAppClick = () => openWhatsAppWithUtm(WA_NUMBERS, "mutetaxes-hk");
+
+  return (
+    <section className="position-relative pt-10 overflow-hidden">
+     
+      <div className="min-[540px]:hidden block absolute bottom-0 left-1/2 -translate-x-1/2 w-[157px] h-[335px] bg-[linear-gradient(0deg,rgba(21,68,234,0.7)_10%,rgba(21,68,234,0.8)_55%,rgba(255,255,255,0.2)_100%)] blur-[40px]"></div>
+      <div className="min-[540px]:hidden block absolute left-0 w-[34.775px] h-[577.697px] bg-[linear-gradient(10deg,rgba(21,68,234,0.6)_20%,rgba(11,40,163,0.5)_60%,rgba(255,255,255,0.2)_100%)] blur-[40px]"></div>
+      <div className="absolute min-[540px]:hidden block right-0 w-[25.976px] h-[431.518px] rotate-[-8.041deg] bg-[linear-gradient(10deg,rgba(21,68,234,0.6)_20%,rgba(11,40,163,0.5)_60%,rgba(255,255,255,0.2)_100%)] blur-[40px]"></div>
+
+      <div className="relative flex flex-col items-center w-full gap-4 sm:gap-5 md:gap-[32px] sm:pb-0 pb-8">
+        <div className="flex flex-col items-start w-full gap-3 sm:gap-4 md:gap-[16px] sm:px-0 px-4">
+          <div className="flex flex-col gap-4 items-center justify-center w-full mb-2">
+            <div className="inline-flex items-center flex-wrap justify-center gap-0">
+              {paymentLogos.map((logo, index) => (
+                <div
+                  key={index}
+                  className="relative w-[70px] h-[60px] sm:w-[95px] sm:h-[80px] md:w-[110px] md:h-[90px] xl:w-[124px] xl:h-[100px] flex items-center justify-center"
+                  style={{ animation: `logoRock${index} 2.5s ease-in-out infinite` }}
+                >
+                  <img className={`${logo.imgClass} object-contain`} alt={logo.alt} src={logo.src} />
+                </div>
+              ))}
+            </div>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 pl-1.5 sm:pl-2 pr-2.5 sm:pr-4 py-0.5 sm:py-1 bg-[#1544ea1a] rounded-[555px]">
+              <img className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] xl:w-[26px] xl:h-[26px]" alt="HK" src="/HKlogo.svg" />
+              <span className="[font-family:'Inter',Helvetica] font-medium text-[#1544ea] text-[10px] sm:text-xs xl:text-sm text-center tracking-[-0.28px] leading-[24px] sm:leading-[28px] xl:leading-[33px] whitespace-nowrap">
+                2,500+
+              </span>
+              <img className="w-px h-3 sm:h-4" alt="Line" src="/line-239.svg" />
+              <span className="[font-family:'Inter',Helvetica] font-medium text-[#1d1c20] text-[10px] sm:text-xs xl:text-sm text-center tracking-[0] leading-[24px] sm:leading-[28px] xl:leading-[33px] whitespace-nowrap">
+                stores processing millions monthly through our HK setups
+              </span>
             </div>
           </div>
-        </div>
-        <img
-          className="absolute left-[161px] top-[131px] h-[78px] w-[78px]"
-          alt="Group"
-          src="https://c.animaapp.com/mpv8f0th9epBAX/img/group-691314571.png"
-        />
-      </div>
-    ),
-    leftGlow: "https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-5-svg-1.svg",
-    rightGlow: "https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-svg-1.svg",
-  },
-  {
-    title: <>Pending payouts</>,
-    description: (
-      <>
-        Your $47,000 (or $147,000 or
-        <br />
-        $347,000) in pending payouts?
-        <br />
-        Held for 90-180 days. Good luck
-        <br />
-        making payroll.
-      </>
-    ),
-    content: (
-      <img
-        className="relative shrink-0"
-        alt="Div"
-        src="https://c.animaapp.com/mpv8f0th9epBAX/img/div.svg"
-      />
-    ),
-    leftGlow: "https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-5-svg.svg",
-    rightGlow: "https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle-svg.svg",
-  },
-];
 
-const bottomCards = [
-  {
-    title: <>You&apos;re Flagged.</>,
-    description: (
-      <>
-        You scramble to find a new processor — but
-        <br />
-        now you&apos;re &quot;flagged.&quot; Every application gets
-        <br />
-        denied. You&apos;re radioactive.
-      </>
-    ),
-    media: (
-      <img
-        className="h-[136.44px] w-[326px]"
-        alt="Group"
-        src="https://c.animaapp.com/mpv8f0th9epBAX/img/group-691314572.png"
-      />
-    ),
-    mediaClassName: "justify-between",
-  },
-  {
-    title: (
-      <>
-        Your ad spend keeps
-        <br />
-        burning
-      </>
-    ),
-    description: (
-      <>
-        Your ad spend keeps burning. Your customers
-        <br />
-        keep ordering. But you can&apos;t collect a single
-        <br />
-        dollar. Revenue goes to zero overnight.
-      </>
-    ),
-    media: (
-      <div className="absolute left-[45px] top-[186px] h-[310px] w-[310px] bg-[url(https://c.animaapp.com/mpv8f0th9epBAX/img/ellipse-210.png)] bg-[100%_100%]">
-        <img
-          className="absolute left-7 top-7 h-[253px] w-[253px]"
-          alt="Ellipse"
-          src="https://c.animaapp.com/mpv8f0th9epBAX/img/ellipse-211.png"
-        />
-        <img
-          className="absolute left-14 top-14 h-[197px] w-[197px]"
-          alt="Ellipse"
-          src="https://c.animaapp.com/mpv8f0th9epBAX/img/ellipse-212.png"
-        />
-        <img
-          className="absolute left-[124px] top-[91px] h-[67px] w-[50px]"
-          alt="Frame"
-          src="https://c.animaapp.com/mpv8f0th9epBAX/img/frame-18.svg"
-        />
-        <div className="absolute left-[3px] top-9 flex h-14 w-14 bg-[url(https://c.animaapp.com/mpv8f0th9epBAX/img/ellipse-207.svg)] bg-[100%_100%]">
-          <img
-            className="ml-[9.1px] mt-[9.1px] h-[38.28px] w-[38.28px]"
-            alt="Image"
-            src="https://c.animaapp.com/mpv8f0th9epBAX/img/image-7.png"
-          />
-        </div>
-        <div className="absolute left-[243px] top-3.5 h-[46px] w-[46px] rotate-[6.53deg]">
-          <img
-            className="absolute -left-0.5 -top-0.5 h-[51px] w-[51px] rotate-[-6.53deg]"
-            alt="Ellipse"
-            src="https://c.animaapp.com/mpv8f0th9epBAX/img/ellipse-213.svg"
-          />
-          <img
-            className="absolute left-[3px] top-[3px] h-10 w-10 rotate-[-6.53deg]"
-            alt="Image"
-            src="https://c.animaapp.com/mpv8f0th9epBAX/img/image-8.png"
-          />
-        </div>
-      </div>
-    ),
-    specialLayout: true,
-  },
-  {
-    title: (
-      <>
-        Your Business at mercy of
-        <br />a support ticket
-      </>
-    ),
-    description: (
-      <>
-        Your 7-figure business — the one you spent
-        <br />
-        years building — is now completely at the
-        <br />
-        mercy of a support ticket that nobody
-        <br />
-        answers.
-      </>
-    ),
-    media: (
-      <img
-        className="relative z-0 mt-0 w-full flex-[0_0_auto] self-stretch"
-        alt="Div w full"
-        src="https://c.animaapp.com/mpv8f0th9epBAX/img/div-w-full.svg"
-      />
-    ),
-    mediaClassName: "justify-between pt-6 pb-[0.36px]",
-  },
-];
-
-export const HeroSection = (): React.JSX.Element => {
-  return (
-    <section className="relative w-full overflow-hidden bg-white px-4 pb-[59px] pt-[107px] sm:px-6 lg:px-[103px]">
-      <img
-        className="absolute inset-0 h-full w-full object-cover"
-        alt="Rectangle"
-        src="https://c.animaapp.com/mpv8f0th9epBAX/img/rectangle.svg"
-      />
-      <div className="relative mx-auto flex w-full max-w-[1234px] flex-col items-center gap-14">
-        <header className="flex flex-col items-center gap-5">
-          <Badge className="inline-flex rounded-[48px] border border-solid border-[#d03232] bg-[#d0323230] px-[18px] py-2 text-base font-normal leading-6 text-[#d03232] hover:bg-[#d0323230] [font-family:'Inter',Helvetica]">
-            <img
-              className="mr-1.5 h-4 w-4"
-              alt="Frame"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/frame-15.svg"
-            />
-            The Ugly Truth Nobody Talks About
-          </Badge>
-          <div className="flex w-full max-w-[877px] flex-col items-center px-4">
-            <img
-              className="h-auto w-full max-w-[737px]"
-              alt="The payment"
-              src="https://c.animaapp.com/mpv8f0th9epBAX/img/the-payment-processor-ticking-time-bomb.svg"
-            />
+          <div className="flex flex-col items-start w-full gap-2 sm:gap-3">
+            <h1 className="w-full [font-family:'Cambo',Helvetica] font-normal text-[32px] sm:text-[38px] md:text-[46px] lg:text-[54px] xl:text-[60px] text-center leading-[110%] text-[#1d1c20]">
+              Process Millions. <br/>Zero Freezes. Zero Surprises.
+            </h1>
           </div>
-          <div className="flex max-w-[877px] flex-col items-center px-4 sm:px-[49.38px]">
-            <p className="mt-[-1.00px] text-center text-lg font-light leading-[27px] tracking-[0] text-[#58585f] [font-family:'Inter',Helvetica]">
-              Right now — this very second — your payment processor is running
-              your account
-              <br />
-              through their risk algorithm. And here&apos;s what they&apos;re
-              deciding:
+
+          <div className="max-w-[800px] mx-auto text-center px-2 sm:px-4">
+            <p className="text-[#58585f] text-[14px] sm:text-sm md:text-base lg:text-lg xl:text-[20px] font-light">
+              <span className="text-[#1d1c20]">Hong Kong&apos;s</span> most trusted payment infrastructure — insider-backed, compliance-ready, and built for merchants who can&apos;t afford downtime.
             </p>
           </div>
-        </header>
-        <div className="flex w-full flex-col items-start gap-6">
-          <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
-            {topCards.map((card, index) => (
-              <Card
-                key={`top-card-${index}`}
-                className="relative overflow-hidden rounded-3xl border-0 bg-slate-100 px-8 py-0 shadow-[0px_1px_2px_-1px_#0000001a,0px_1px_3px_#0000001a] backdrop-blur-[29px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(29px)_brightness(100%)]"
-              >
-                <CardContent className="relative flex min-h-[273px] items-center gap-[37px] p-0">
-                  {card.content}
-                  <div className="inline-flex min-w-[229px] max-w-[229px] flex-col items-start px-0 pb-0 pt-3">
-                    <div className="flex w-full flex-col items-start px-0 pb-3 pt-0">
-                      <h3 className="mt-[-1.00px] w-fit text-2xl font-normal leading-8 tracking-[0] text-[#1d1c20] [font-family:'Inter',Helvetica]">
-                        {card.title}
-                      </h3>
-                    </div>
-                    <div className="relative flex w-full flex-col items-start">
-                      <p className="mt-[-1.00px] w-fit text-sm font-normal leading-[21px] tracking-[0] text-[#58585f] [font-family:'Inter',Helvetica]">
-                        {card.description}
-                      </p>
-                    </div>
-                  </div>
-                  <img
-                    className="absolute left-[-257px] top-[149px] h-[362px] w-[541px]"
-                    alt="Rectangle svg"
-                    src={card.leftGlow}
-                  />
-                  <img
-                    className="absolute left-[193px] top-[149px] h-[362px] w-[541px]"
-                    alt="Rectangle svg"
-                    src={card.rightGlow}
-                  />
-                </CardContent>
-              </Card>
+        </div>
+
+        <div className="flex flex-col w-full max-w-[650px] items-center justify-center px-2 sm:px-0 gap-1.5 sm:gap-2">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 w-full flex-wrap">
+            {featureBadgesRow1.map((badge, index) => (
+              <div key={index} className="inline-flex items-center gap-1 sm:gap-2 px-1.5 py-1 sm:p-2 rounded-[50px] border border-solid border-[#ffffff33] bg-[rgba(22,68,235,0.15)]">
+                <img className="w-3 h-3 sm:w-4 sm:h-4" alt="Group" src={badge.icon} />
+                <span className="[font-family:'Inter',Helvetica] font-medium text-[#1d1c20] text-[10px] sm:text-xs xl:text-sm tracking-[0] leading-[13px] sm:leading-[15.4px] whitespace-nowrap">
+                  {badge.text}
+                </span>
+              </div>
             ))}
           </div>
-          <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-3">
-            {bottomCards.map((card, index) => (
-              <Card
-                key={`bottom-card-${index}`}
-                className="relative overflow-hidden rounded-3xl border-0 bg-slate-100 shadow-[0px_1px_2px_-1px_#0000001a,0px_1px_3px_#0000001a] backdrop-blur-[29px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(29px)_brightness(100%)]"
-              >
-                <div className="absolute bottom-0 left-0 h-[60px] w-full bg-[linear-gradient(0deg,rgba(208,50,50,0.4)_0%,rgba(208,50,50,0.2)_50%,rgba(208,50,50,0)_100%)]" />
-                <CardContent className="p-0">
-                  {card.specialLayout ? (
-                    <div className="relative h-[338px] w-full overflow-hidden">
-                      <div className="absolute left-8 top-6 flex w-[calc(100%_-_84px)] max-w-[311px] flex-col items-start px-0 pb-0 pt-3">
-                        <div className="flex w-full flex-col items-start">
-                          <h3 className="mt-[-1.00px] self-stretch text-2xl font-normal leading-8 tracking-[0] text-[#1d1c20] [font-family:'Inter',Helvetica]">
-                            {card.title}
-                          </h3>
-                        </div>
-                        <div className="relative flex w-full flex-col items-start px-0 pb-0 pt-[9px]">
-                          <p className="mt-[-1.00px] self-stretch text-sm font-normal leading-5 tracking-[0] text-[#58585f] [font-family:'Inter',Helvetica]">
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                      {card.media}
-                    </div>
-                  ) : (
-                    <div
-                      className={`relative flex h-[338px] w-full flex-col items-start px-8 py-6 ${card.mediaClassName ?? ""}`}
-                    >
-                      <div className="relative z-[1] flex w-[311px] max-w-[311px] flex-col items-start px-0 pb-0 pt-3">
-                        <div className="flex w-full flex-col items-start">
-                          <h3 className="mt-[-1.00px] self-stretch text-2xl font-normal leading-8 tracking-[0] text-[#1d1c20] [font-family:'Inter',Helvetica]">
-                            {card.title}
-                          </h3>
-                        </div>
-                        <div className="relative flex w-full flex-col items-start px-0 pb-0 pt-[9px]">
-                          <p className="mt-[-1.00px] self-stretch text-sm font-normal leading-5 tracking-[0] text-[#58585f] [font-family:'Inter',Helvetica]">
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                      {card.media}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 flex-wrap justify-center">
+            {featureBadgesRow2.map((badge, index) => (
+              <div key={index} className="inline-flex items-center gap-1 sm:gap-2 px-1.5 py-1 sm:p-2 rounded-[50px] border border-solid border-[#ffffff33] bg-[rgba(22,68,235,0.15)]">
+                <img className="w-3 h-3 sm:w-4 sm:h-4" alt="Group" src={badge.icon} />
+                <span className="[font-family:'Inter',Helvetica] font-medium text-[#1d1c20] text-[10px] sm:text-xs xl:text-sm tracking-[0] leading-[13px] sm:leading-[15.4px] whitespace-nowrap">
+                  {badge.text}
+                </span>
+              </div>
             ))}
           </div>
         </div>
+
+        <div className="flex flex-col items-start w-full gap-3 sm:gap-4">
+          <div className="flex w-auto flex-row items-center justify-center mx-auto lg:w-full gap-2 sm:gap-3">
+            <div className="p-[1px] rounded-xl bg-[linear-gradient(to_bottom_right,rgba(21,68,234,1)_0%,rgba(21,68,234,0.25)_15%,rgba(21,68,234,0.25)_90%,rgba(21,68,234,1)_100%)] transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(21,68,234,0.45)] active:scale-[0.98]">
+              <button
+                onClick={handleWhatsAppClick}
+                className="relative w-auto h-auto inline-flex items-center justify-center gap-2 px-3 py-1.5 sm:px-6 sm:py-2 rounded-xl bg-[#1544ea] text-white font-bold overflow-hidden hover:bg-gradient-to-r hover:from-[#1d54f5] hover:to-[#0e3bcf]"
+              >
+                <div className="w-[326px] h-[80px] absolute left-[-182.5px] bottom-[-76px] rounded-[326px] bg-[#D9D9D9] blur-[27px]"></div>
+                <span className="uppercase relative font-normal text-[10px] sm:text-sm tracking-[-0.32px] leading-5 sm:leading-6">
+                  CHAT WITH A SPECIALIST
+                </span>
+              </button>
+            </div>
+
+            <div className="p-[1px] rounded-xl bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.1)_15%,rgba(255,255,255,0.1)_85%,rgba(255,255,255,0.6)_100%)] transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] active:scale-[0.98]">
+              <Button
+                onClick={() => setShowCalendly(true)}
+                className="relative w-auto h-auto inline-flex items-center justify-center gap-2 px-3 py-1.5 sm:px-6 sm:py-2 rounded-xl bg-[#212121] text-white font-bold overflow-hidden hover:bg-gradient-to-r hover:from-[#2a2a2a] hover:to-[#121212]"
+              >
+                <div className="absolute w-[326px] h-[80px] left-[-182.5px] bottom-[-76px] rounded-[326px] bg-[#D9D9D9] blur-[27px]"></div>
+                <span className="relative text-[10px] font-normal sm:text-sm tracking-[-0.32px] leading-5 sm:leading-6">
+                  BOOK A FREE CONSULTATION!
+                </span>
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center w-full px-2">
+            <p className="[font-family:'Inter',Helvetica] font-normal text-[#58585f] text-[10px] sm:text-xs text-center tracking-[0] leading-4">
+              🔒 Secure Setup&nbsp;&nbsp;•&nbsp;&nbsp;💳&nbsp;&nbsp;Card or Bank Transfer&nbsp;&nbsp;•&nbsp;&nbsp;⚡ 7-Day Delivery
+            </p>
+          </div>
+        </div>
       </div>
+
+      <Modal isOpen={showCalendly} onClose={() => setShowCalendly(false)}>
+        <iframe
+          src="https://calendly.com/d/cvs4-phh-xky/swiftnine-payments-booking"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allowFullScreen
+          className="rounded-b-xl min-h-[700px] sm:min-h-[850px]"
+        ></iframe>
+      </Modal>
     </section>
   );
 };
