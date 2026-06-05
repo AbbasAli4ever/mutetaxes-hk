@@ -3,7 +3,7 @@ import { MailIcon, PhoneIcon } from "lucide-react";
 import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 import Image from "next/image";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const achievements = ["2500+ Successful Setups", "€100M+ Processed Monthly", "4 Years of Excellence", "24/7 Support Guarantee"];
 
@@ -34,7 +34,7 @@ export const FooterSection = () => {
               <div className="flex items-center gap-3">
                 <PhoneIcon className="w-5 h-5 text-[#A1A1AA]" />
                 <a onClick={() => openWhatsAppWithUtm(WA_NUMBERS, "mutetaxes-hk")} style={{ cursor: "pointer" }} className="text-[#A1A1AA] hover:text-[#1544ea] transition-colors text-sm lg:text-base">
-                  WhatsApp: +44 7848 102776
+                  WhatsApp: +44 7445 609826
                 </a>
               </div>
             </div>

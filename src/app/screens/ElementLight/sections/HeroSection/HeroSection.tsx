@@ -5,7 +5,7 @@ import { Modal } from "../../../../components/ui/Modal";
 import Image from "next/image";
 import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const paymentLogos = [
   { alt: "Paypal", src: "/paypal.svg", imgClass: "w-[60px] h-[48px] sm:w-[80px] sm:h-[64px] md:w-[100px] md:h-[78px] xl:w-[113px] xl:h-[88px]" },
@@ -133,7 +133,7 @@ export const HeroSection = () => {
 
       <Modal isOpen={showCalendly} onClose={() => setShowCalendly(false)}>
         <iframe
-          src="https://calendly.com/d/cvs4-phh-xky/swiftnine-payments-booking"
+          src="https://calendly.com/d/cxy2-dy2-tqk/mutetaxes-consultation-call"
           width="100%"
           height="100%"
           frameBorder="0"

@@ -8,7 +8,7 @@ import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const features = [
   { icon: "/container-2.svg", title: "Hong Kong Company Formation", description: "Full Hong Kong Limited Company formation — registered address, company secretary, government registration, certificate of incorporation" },

@@ -7,7 +7,7 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import Image from "next/image";
 import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const pricingPlans = [
   {

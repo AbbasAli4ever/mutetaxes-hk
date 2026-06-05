@@ -6,7 +6,7 @@ import { openWhatsAppWithUtm } from "../lib/whatsapp";
 
 const Modal = dynamic(() => import("./ui/Modal").then(m => m.Modal), { ssr: false });
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const Nav = () => {
   const [showCalendly, setShowCalendly] = useState(false);
@@ -47,7 +47,7 @@ const Nav = () => {
       </nav>
       <Modal isOpen={showCalendly} onClose={() => setShowCalendly(false)}>
         <iframe
-          src="https://calendly.com/d/cvs4-phh-xky/swiftnine-payments-booking"
+          src="https://calendly.com/d/cxy2-dy2-tqk/mutetaxes-consultation-call"
           width="100%"
           height="100%"
           frameBorder="0"

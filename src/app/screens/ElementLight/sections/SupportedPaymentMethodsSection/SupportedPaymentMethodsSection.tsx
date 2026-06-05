@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { openWhatsAppWithUtm } from "../../../../lib/whatsapp";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const processSteps = [
   { number: 1, duration: "3-5 days", title: "Hong Kong Company Formation", description: "We handle your complete Hong Kong Limited company setup with proper business registration, ensuring compliance with local regulations and positioning you for financial services approval.", position: "bottom" },

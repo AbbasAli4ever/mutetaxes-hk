@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { openWhatsAppWithUtm } from "../../lib/whatsapp";
 
-const WA_NUMBERS = ["447848102776", "447445609826", "17869274708"];
+const WA_NUMBERS = ["447445609826"];
 
 const PaymentProcessorRiskSection = dynamic(() => import("./sections/PaymentProcessorRiskSection").then(m => m.PaymentProcessorRiskSection), { ssr: false });
 const ProcessorComparisonSection = dynamic(() => import("./sections/ProcessorComparisonSection").then(m => m.ProcessorComparisonSection), { ssr: false });
