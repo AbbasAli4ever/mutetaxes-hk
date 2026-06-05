@@ -2,6 +2,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 import { openWhatsAppWithUtm } from "../lib/whatsapp";
 
 const Modal = dynamic(() => import("./ui/Modal").then(m => m.Modal), { ssr: false });
@@ -16,7 +17,7 @@ const Nav = () => {
   return (
     <>
       <nav className="flex items-center justify-between px-5 sm:px-8 md:px-12 lg:px-[100px] py-3 w-full z-50 bg-[#ffffff0d] backdrop-blur-md">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo.png"
             alt="MuteTaxes"
@@ -25,7 +26,7 @@ const Nav = () => {
             height={50}
             priority
           />
-        </div>
+        </Link>
 
         <div className="flex items-center gap-1 sm:gap-4">
           <button
